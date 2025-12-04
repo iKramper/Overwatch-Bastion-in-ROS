@@ -1,0 +1,21 @@
+<package>
+
+    <!-- Initial package configuration -->
+    <name>bastion_gazebo</name>
+    <version>0.0.1</version>
+
+    <!-- Package description -->
+    <description>Bastion Package for Gazebo representation</description>
+    <maintainer email="elkinestrada1806@gmail.com">zitronensaft18</maintainer>
+    <license>BSD-3-Clause</license>
+    <author email="elkinestrada1806@gmail.com">zitronensaft18</author>
+
+    <!-- Build to dependencies for ament package -->
+    <buildtool_depend>ament_cmake</buildtool_depend>
+
+    <!-- Export dependencies -->
+    <export>
+        <build_type>ament_cmake</build_type>
+    </export>
+
+</package>
