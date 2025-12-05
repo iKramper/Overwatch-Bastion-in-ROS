@@ -55,9 +55,9 @@
             </link>
         </model>
 
-        <scene>
+        <scene>            <!--Create a sky and set its configuration-->
             <ambient>0.8 0.8 0.8 1</ambient>
-            <background>0 0 0 1</background>
+            <background>0 0 0 1</background>            <!--Set ground color to black-->
         </scene>
 
     </world>
