@@ -36,10 +36,10 @@ def generate_launch_description():
     pkg_desc = FindPackageShare("bastion_description")
 
     # Launch files:
-    gazebo_launch     = PathJoinSubstitution([pkg_gz,   "launch", "start_world.launch.py"])
-    launch_models     = PathJoinSubstitution([pkg_gz,   "launch", "spawn_models.launch.py"])
-    urdf_launch       = PathJoinSubstitution([pkg_desc, "launch", "publish_urdf.launch.py"])
-    spawn_launch      = PathJoinSubstitution([pkg_gz,   "launch", "spawn_bastion.launch.py"])
+    start_world    = PathJoinSubstitution([pkg_gz,   "launch", "start_world.launch.py"])
+    spawn_models     = PathJoinSubstitution([pkg_gz,   "launch", "spawn_models.launch.py"])
+    publish_urdf       = PathJoinSubstitution([pkg_desc, "launch", "publish_urdf.launch.py"])
+    spawn_bastion      = PathJoinSubstitution([pkg_gz,   "launch", "spawn_bastion.launch.py"])
 
     return LaunchDescription([
         use_sim_time_arg,
@@ -48,7 +48,7 @@ def generate_launch_description():
 
         # 1. Start Gazebo:
         IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(gazebo_launch),
+            PythonLaunchDescriptionSource(start_world ),
             launch_arguments={'use_sim_time': use_sim_time}.items()
         ),
         
@@ -56,7 +56,7 @@ def generate_launch_description():
         TimerAction(
             period=3.0,
             actions=[ IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(urdf_launch),
+                PythonLaunchDescriptionSource(publish_urdf),
                 launch_arguments={'use_sim_time': use_sim_time}.items()
             ) ]
         ),
@@ -65,7 +65,7 @@ def generate_launch_description():
         TimerAction(
             period=5.0,
             actions=[ IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(launch_models),
+                PythonLaunchDescriptionSource(spawn_models),
                 launch_arguments={'use_sim_time': use_sim_time}.items()
             ) ]
         ),
@@ -74,7 +74,7 @@ def generate_launch_description():
         TimerAction(
             period=7.0,
             actions=[ IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(spawn_launch),
+                PythonLaunchDescriptionSource(spawn_bastion),
                 launch_arguments={'use_sim_time': use_sim_time}.items()
             ) ]
         ),
