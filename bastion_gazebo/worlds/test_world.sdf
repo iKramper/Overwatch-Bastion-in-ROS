@@ -48,12 +48,17 @@
                     </geometry>
                     <material>
                         <ambient>0.8 0.8 0.8 1</ambient>
-                        <diffuse>0 0 0 1</diffuse>                        <!--Set ground color to black. Remember: R G B Alpha-->
+                        <diffuse>0 0 0 1</diffuse>                        <!--Set ground color to black-->
                         <specular>0.8 0.8 0.8 1</specular>
                     </material>
                 </visual>
             </link>
         </model>
+
+        <scene>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <background>0 0 0 1</background>
+        </scene>
 
     </world>
 </sdf>
