@@ -22,6 +22,41 @@ def generate_launch_description():
     # Find package share directory:
     pkg_gz = FindPackageShare("bastion_gazebo")
 
+    # class Model:
+    #     def __init__(self, model_name, gz_name, coordinates):
+    #         self.model_name = model_name
+    #         self.gz_name = gz_name
+    #         self.coordinates = coordinates
+    #         self.path = PathJoinSubstitution([
+    #             pkg_gz,
+    #             "models",
+    #             self.model_name,
+    #             "sdf",
+    #             self.model_name + ".sdf"
+    #         ])
+    #         self.spawn_node = Node(
+    #             package='ros_gz_sim',
+    #             executable='create',
+    #             name='spawn_' + self.model_name,
+    #             output='screen',
+    #             arguments=[
+    #                 '-entity', self.gz_name,
+    #                 '-file', self.path,
+    #                 '-allow_renaming', 'true',
+    #                 '-x', str(self.coordinates[0]),
+    #                 '-y', str(self.coordinates[1]),
+    #                 '-z', str(self.coordinates[2]),
+    #                 '-R', str(self.coordinates[3]),
+    #                 '-P', str(self.coordinates[4]),
+    #                 '-Y', str(self.coordinates[5]),
+    #             ],
+    #             parameters=[{'use_sim_time': use_sim_time}]
+    #         )
+    
+    # desk = Model("desk", "office_desk", [-0.19, -0.03, 0.54, 0.0, 0.0, 0.0])
+
+
+
     # Path to desk SDF model:
     desk_sdf_path = PathJoinSubstitution([
         pkg_gz,
