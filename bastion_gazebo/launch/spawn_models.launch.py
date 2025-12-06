@@ -22,111 +22,112 @@ def generate_launch_description():
     # Find package share directory:
     pkg_gz = FindPackageShare("bastion_gazebo")
 
-    # class Model:
-    #     def __init__(self, model_name, gz_name, coordinates):
-    #         self.model_name = model_name
-    #         self.gz_name = gz_name
-    #         self.coordinates = coordinates
-    #         self.path = PathJoinSubstitution([
-    #             pkg_gz,
-    #             "models",
-    #             self.model_name,
-    #             "sdf",
-    #             self.model_name + ".sdf"
-    #         ])
-    #         self.spawn_node = Node(
-    #             package='ros_gz_sim',
-    #             executable='create',
-    #             name='spawn_' + self.model_name,
-    #             output='screen',
-    #             arguments=[
-    #                 '-entity', self.gz_name,
-    #                 '-file', self.path,
-    #                 '-allow_renaming', 'true',
-    #                 '-x', str(self.coordinates[0]),
-    #                 '-y', str(self.coordinates[1]),
-    #                 '-z', str(self.coordinates[2]),
-    #                 '-R', str(self.coordinates[3]),
-    #                 '-P', str(self.coordinates[4]),
-    #                 '-Y', str(self.coordinates[5]),
-    #             ],
-    #             parameters=[{'use_sim_time': use_sim_time}]
-    #         )
+    class Model:
+        def __init__(self, model_name, gz_name, coordinates):
+            self.model_name = model_name
+            self.gz_name = gz_name
+            self.coordinates = coordinates
+            self.path = PathJoinSubstitution([
+                pkg_gz,
+                "models",
+                self.model_name,
+                "sdf",
+                self.model_name + ".sdf"
+            ])
+            self.spawn_node = Node(
+                package='ros_gz_sim',
+                executable='create',
+                name='spawn_' + self.model_name,
+                output='screen',
+                arguments=[
+                    '-entity', self.gz_name,
+                    '-file', self.path,
+                    '-allow_renaming', 'true',
+                    '-x', str(self.coordinates[0]),
+                    '-y', str(self.coordinates[1]),
+                    '-z', str(self.coordinates[2]),
+                    '-R', str(self.coordinates[3]),
+                    '-P', str(self.coordinates[4]),
+                    '-Y', str(self.coordinates[5]),
+                ],
+                parameters=[{'use_sim_time': use_sim_time}]
+            )
     
-    # desk = Model("desk", "office_desk", [-0.19, -0.03, 0.54, 0.0, 0.0, 0.0])
+    desk = Model("desk", "office_desk", [-0.19, -0.03, 0.54, 0.0, 0.0, 0.0])
+    lamp = Model("lamp", "desk_lamp", [-0.68, 0.20, 0.84, 0.0, 0.0, 2.08])
 
 
 
-    # Path to desk SDF model:
-    desk_sdf_path = PathJoinSubstitution([
-        pkg_gz,
-        "models",
-        "desk",
-        "sdf",
-        "desk.sdf"
-    ])
+    # # Path to desk SDF model:
+    # desk_sdf_path = PathJoinSubstitution([
+    #     pkg_gz,
+    #     "models",
+    #     "desk",
+    #     "sdf",
+    #     "desk.sdf"
+    # ])
 
-    # Path to lamp SDF model:
-    lamp_sdf_path = PathJoinSubstitution([
-        pkg_gz,
-        "models",
-        "lamp",
-        "sdf",
-        "lamp.sdf"
-    ])
+    # # Path to lamp SDF model:
+    # lamp_sdf_path = PathJoinSubstitution([
+    #     pkg_gz,
+    #     "models",
+    #     "lamp",
+    #     "sdf",
+    #     "lamp.sdf"
+    # ])
 
-    # Desk spawn configuration:
-    desk_name = "office_desk"
-    desk_position = [-0.19, -0.03, 0.54]       # X, Y, Z (meters)
-    desk_orientation = [0.0, 0.0, 0.0]         # Roll, Pitch, Yaw (radians)
+    # # Desk spawn configuration:
+    # desk_name = "office_desk"
+    # desk_position = [-0.19, -0.03, 0.54]       # X, Y, Z (meters)
+    # desk_orientation = [0.0, 0.0, 0.0]         # Roll, Pitch, Yaw (radians)
 
     # Lamp spawn configuration:
-    lamp_name = "desk_lamp"
-    lamp_position = [-0.68, 0.20, 0.84]        # X, Y, Z (meters)
-    lamp_orientation = [0.0, 0.0, 2.08]        # Roll, Pitch, Yaw (radians)
+    # lamp_name = "desk_lamp"
+    # lamp_position = [-0.68, 0.20, 0.84]        # X, Y, Z (meters)
+    # lamp_orientation = [0.0, 0.0, 2.08]        # Roll, Pitch, Yaw (radians)
 
-    # Spawn desk model in Gazebo:
-    spawn_desk = Node(
-        package='ros_gz_sim',
-        executable='create',
-        name='spawn_desk',
-        output='screen',
-        arguments=[
-            '-entity', desk_name,
-            '-file', desk_sdf_path,
-            '-allow_renaming', 'true',
-            '-x', str(desk_position[0]),
-            '-y', str(desk_position[1]),
-            '-z', str(desk_position[2]),
-            '-R', str(desk_orientation[0]),
-            '-P', str(desk_orientation[1]),
-            '-Y', str(desk_orientation[2]),
-        ],
-        parameters=[{'use_sim_time': use_sim_time}]
-    )
+    # # Spawn desk model in Gazebo:
+    # spawn_desk = Node(
+    #     package='ros_gz_sim',
+    #     executable='create',
+    #     name='spawn_desk',
+    #     output='screen',
+    #     arguments=[
+    #         '-entity', desk_name,
+    #         '-file', desk_sdf_path,
+    #         '-allow_renaming', 'true',
+    #         '-x', str(desk_position[0]),
+    #         '-y', str(desk_position[1]),
+    #         '-z', str(desk_position[2]),
+    #         '-R', str(desk_orientation[0]),
+    #         '-P', str(desk_orientation[1]),
+    #         '-Y', str(desk_orientation[2]),
+    #     ],
+    #     parameters=[{'use_sim_time': use_sim_time}]
+    # )
 
     # Spawn lamp model in Gazebo:
-    spawn_lamp = Node(
-        package='ros_gz_sim',
-        executable='create',
-        name='spawn_lamp',
-        output='screen',
-        arguments=[
-            '-entity', lamp_name,
-            '-file', lamp_sdf_path,
-            '-allow_renaming', 'true',
-            '-x', str(lamp_position[0]),
-            '-y', str(lamp_position[1]),
-            '-z', str(lamp_position[2]),
-            '-R', str(lamp_orientation[0]),
-            '-P', str(lamp_orientation[1]),
-            '-Y', str(lamp_orientation[2]),
-        ],
-        parameters=[{'use_sim_time': use_sim_time}]
-    )
+    # spawn_lamp = Node(
+    #     package='ros_gz_sim',
+    #     executable='create',
+    #     name='spawn_lamp',
+    #     output='screen',
+    #     arguments=[
+    #         '-entity', lamp_name,
+    #         '-file', lamp_sdf_path,
+    #         '-allow_renaming', 'true',
+    #         '-x', str(lamp_position[0]),
+    #         '-y', str(lamp_position[1]),
+    #         '-z', str(lamp_position[2]),
+    #         '-R', str(lamp_orientation[0]),
+    #         '-P', str(lamp_orientation[1]),
+    #         '-Y', str(lamp_orientation[2]),
+    #     ],
+    #     parameters=[{'use_sim_time': use_sim_time}]
+    # )
 
     return LaunchDescription([
         use_sim_time_arg,
-        spawn_desk,
-        spawn_lamp,
+        desk.spawn_node,
+        lamp.spawn_node,
     ])
